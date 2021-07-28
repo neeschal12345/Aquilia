@@ -1,0 +1,64 @@
+﻿
+@model Aquilia.Models.RawMaterials
+
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body>
+            <div class="card" style="width: 18rem; padding: 20px; width: 100%; height: 100%; font-family: 'Public Sans', sans-serif; opacity: 80%;">
+                <div class="card-body">
+                    <form method="post" asp-action="AddNewRawMaterials" asp-controller="RawMaterials">
+                        <h1 style="padding-bottom:30px;">New Raw Materials Purchase</h1>
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <label>Vendor Name</label>
+                                <select asp-for="VendorID" class="form-control" asp-items="@(new SelectList(@ViewBag.listofvendors,"VendorID", "VendorName"))">
+                                </select>
+                            </div>
+                        </div>
+                        <div style=" border-radius: 10px; border: 3px solid #cfcfcf; padding: 20px; width: 100%; height: 100%; margin-top:10px;">
+                            <div class="row" style="margin-top:10px;">
+
+                                <div class="col-xl-3">
+                                    <label for="exampleInputPassword1">BillNo.</label>
+                                    <input type="text" asp-for="BillNo" class="form-control" id="exampleInputPassword1" placeholder="Enter the Product Code">
+                                </div>
+                                <div class="col-xl-3">
+                                    <label for="vendorName">Raw Material Name</label>
+                                    <input type="text" asp-for="Description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Product Part Name">
+                                </div>
+                                <div class="col-xl-3">
+
+                                    <label for="exampleInputPassword1">Price</label>
+                                    <input type="text" asp-for="Rate" class="form-control" id="exampleInputPassword1" placeholder="Enter the Product Code">
+                                </div>
+
+
+                                <div class="col-xl-3">
+                                    <label for="exampleInputPassword1">Quantity</label>
+                                    <input type="text" asp-for="Quantity" class="form-control" id="exampleInputPassword1" placeholder="Choose the Product Name">
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top:20px;padding-bottom:10px;">
+                                <div class="col-xl-3">
+                                    <label for="exampleInputPassword1">Total Amount</label>
+                                    <input type="text" asp-for="CreditAmount" class="form-control" id="exampleInputPassword1" placeholder="Choose the Product Name">
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="float:right; margin-top:20px;">Submit</button>
+                    </form>
+                    
+                   
+                </div>
+                </div>
+
+        
+</body>
+
+</html>

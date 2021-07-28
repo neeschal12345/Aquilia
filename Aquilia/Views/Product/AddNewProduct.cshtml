@@ -1,0 +1,43 @@
+﻿@model Aquilia.Models.FinalProduct
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="Content/css/bootstrap.css" rel="stylesheet" />
+
+    <link href="Content/css/bootstrap-theme.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="padding-left: 30px; padding-top:30px; font-family: 'Public Sans', sans-serif; opacity:80%;">
+            <div class="card" style="padding :20px;">
+                <div class="card-body">
+                    <form method="post" asp-action="AddNewProduct" asp-controller="Product">
+
+                        <h1 style="padding-bottom:30px;">New Finished Product Entry</h1>
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <label for="vendorName">Product Name</label>
+                                <input type="text" asp-for="ProductName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Product Name">
+                            </div>
+                            <div class="col-xl-3">
+                                <label for="exampleInputPassword1">Product Category</label>
+                                <input type="text" asp-for="Category" class="form-control" id="exampleInputPassword1" placeholder="What Category is the product?">
+                            </div>
+                            <div class="col-xl-3">
+                                <label for="exampleInputPassword1">Product Size</label>
+                                <input type="text" asp-for="ProductSize" class="form-control" id="exampleInputPassword1" placeholder="Enter the Product Size in inches">
+                            </div>
+                            <div class="col-xl-3">
+                                <label for="exampleInputPassword1">Product Price</label>
+                                <input type="text" asp-for="ProductPrice" class="form-control" id="exampleInputPassword1" placeholder="Enter the Product Size in inches">
+                            </div>
+                        </div>
+                        <button type="reset" class="btn btn-danger" style="margin-top:20px; float:right;"><i class="far fa-window-close"></i> Cancel</button>
+                        <button type="submit" class="btn btn-success" style="margin-top:20px; margin-right:20px; float:right;"><i class="far fa-check-square"></i> Submit</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+﻿@model Aquilia.Models.DebitCredit
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="Content/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="Content/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script type="text/javascript" src="Content/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Content/js/script.js"></script>
+
+</head>
+<body>
+    <div class="col-md-2"> <button class="btn btn-primary" style="margin-top:25px;" href="~/DebitCredit/AddNewTransaction">Add Transaction</button></div>
+    <div class="row" style="margin-left:10px;">
+        <div class="col-md-5">
+            <h6>Active Employees:</h6> <select asp-for="EmployeeID" , id="selectedEmployeeID"
+                                               class="form-control"
+                                               asp-items="@(new SelectList(@ViewBag.listofemployee,"EmployeeID", "EmployeeName"))" style="width: 500px;">
+            </select>
+            <br>
+            <h3>Employee Name:</h3>
+        </div>
+        
+        <div class="col-md-1"> <input type="button" class="btn btn-success" value="Search" onclick="VendorPurchase()" style="margin-top:25px;"></div>
+        <div class="col-md-1"> <button type="reset" class="btn btn-danger" style="margin-top:25px;">Cancel</button></div>
+
+
+    </div>
+    <table id="example" class="table table-striped table-bordered" style="width:97%; background-color:white; margin:20px;">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Description</th>
+                <th>Voucher Number</th>
+                <th>Transaction Type</th>
+                <th>Amount</th>
+                <th>Total Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+
+    </table>
+    <script>
+
+        function VendorPurchase() {
+            var transDate = $('#transactionDate').val();
+            var VenID = $('#selectedEmployeeID').val();
+            window.location.href = '@Url.Action("DisplayEmployeeLedger", "DebitCredit")?EMP_ID=' + VenID;
+        }
+
+        $(document).ready(function () {
+
+    $('#example').DataTable();
+    $("#datepicker").datepicker();
+        });</script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/datatables-demo.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    @*</form>*@
+</body>
+
+
+</html>

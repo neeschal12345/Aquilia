@@ -1,0 +1,63 @@
+﻿@model Aquilia.Models.ProductParts
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+</head>
+<body>
+            <div class="card" style="padding: 20px;font-family: 'Public Sans', sans-serif; opacity:80%">
+                <div class="card-body">
+                    <form method="post" asp-action="AddNewProductParts" asp-controller="ProductParts">
+                        <h1 style="padding-bottom:30px;">New Product Parts Entry</h1>
+                        <div class="row">
+
+                            <div class="col-xl-3">
+                                <label for="vendorName">Final Product Name</label>
+                                <select asp-for="FinalProductID"
+                                        class="form-control"
+                                        asp-items="@(new SelectList(@ViewBag.ListofFinalProducts,"FinalProductID", "ProductName"))">
+                                </select>
+
+                            </div>
+                        </div>
+                        <div style=" border-radius: 10px; border: 3px solid #cfcfcf; padding: 20px; width: 100%; height: 100%; background-color: #fffaed; margin-top:20px;">
+                            <div class="row">
+
+                                <div class="col-xl-3">
+                                    <label for="vendorName">Product Part Name</label>
+                                    <input type="text" asp-for="ProductPartName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Product Part Name" style="display:inline">
+                                </div>
+                                <div class="col-xl-3">
+                                    <label for="exampleInputPassword1">Product Part Code No.</label>
+                                    <input type="text" asp-for="ProductPartNumber" class="form-control" id="exampleInputPassword1" placeholder="Enter the Product Code" style="display:inline">
+                                </div>
+                                <div class="col-xl-3">
+                                    <label for="exampleInputPassword1">Product Category</label>
+                                    <input type="text" asp-for="ProductPartCategory" class="form-control" id="exampleInputPassword1" placeholder="Choose the Product Quanitty" style="display:inline">
+                                </div>
+                                <div class="col-xl-3">
+                                    <label for="exampleInputPassword1">Wax Quantity</label>
+                                    <input type="text" asp-for="WaxComposition" class="form-control" id="exampleInputPassword1" placeholder="Choose the Wax Quanitty">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-xl-3">
+                                    <label for="exampleInputPassword1">Copper Quantity</label>
+                                    <input type="text" asp-for="CopperComposition" class="form-control" id="exampleInputPassword1" disabled>
+                                </div>
+
+                                <div class="col-xl-3">
+                                    <label for="exampleInputPassword1">Product Quantity</label>
+                                    <input type="text" asp-for="ProductPartQuantity" class="form-control" id="exampleInputPassword1" placeholder="Choose the Product Quanitty">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="reset" class="btn btn-danger" style="margin-top:20px; float:right;"><i class="far fa-window-close"></i> Cancel</button>
+                        <button type="submit" class="btn btn-success" style="margin-top:20px; margin-right:20px; float:right;"><i class="far fa-check-square"></i> Submit</button>
+                    </form>
+               </div>
+            </div>
+</body>
+
+</html>

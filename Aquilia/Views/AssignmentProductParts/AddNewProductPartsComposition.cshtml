@@ -1,0 +1,43 @@
+﻿@model Aquilia.Models.Assignment_RawMaterials
+<!DOCTYPE html>
+
+<html>
+
+<body>
+    <div class="row" style="padding-left:30px;padding-top:30px;">
+        <div class="col-sm-6">
+            <div class="card" style="padding: 20px;font-family: 'Public Sans', sans-serif;">
+                
+                <form method="post" asp-action="AddNewProductPartsComposition" asp-controller="AssignmentProductParts">
+                    <h1 style="padding-bottom:30px;">Resource Impart</h1>
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <label for="exampleInputPassword1">Assignment Name</label>
+                            <select asp-for="AssignmentID"
+                                    class="form-control"
+                                    asp-items="@(new SelectList(@ViewBag.listofassignments,"AssignmentID","AssignmentName"))" style="width: 500px;">
+                            </select>
+                        </div>
+                        <div class="col-xl-4">
+                            <label for="exampleInputPassword1">Raw Material Name</label>
+                            <select asp-for="RawMaterialID"
+                                    class="form-control"
+                                    asp-items="@(new SelectList(@ViewBag.ListofRawMaterials,"RawMaterialID", "RawMaterialName"))" style="width: 500px;">
+                            </select>
+                        </div>
+                        <div class="col-xl-4">
+                                <label for="exampleInputPassword1">Quantity</label>
+                                <input type="text" asp-for="Quantity" class="form-control" id="exampleInputPassword1" placeholder="Choose the Product Name">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                 </form>
+                </div>
+            </div>
+        </div>
+       
+</body>
+
+
+</html>
+

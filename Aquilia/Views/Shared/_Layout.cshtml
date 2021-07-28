@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+            data-auto-a11y="true"></script>
+    <title>Aquilia - Keep your data simple and life simpler.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@100&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- reference your copy Font Awesome here (from our CDN or by hosting yourself) -->
+    <link href="~/assets/css/fontawesome.css" rel="stylesheet">
+    <link href="~/assets/css/brands.css" rel="stylesheet">
+    <link href="~/assets/css/solid.css" rel="stylesheet">
+    <style>
+        .sidenav {
+            color: white;
+            height: 100%; /* Full-height: remove this if you want "auto" height */
+            width: 200px; /* Set the width of the sidebar */
+            position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+            z-index: 1; /* Stay on top */
+            top: 0; /* Stay at the top */
+            left: 0;
+            background-color: #cf2f3e; /* Black */
+            overflow-x: hidden; /* Disable horizontal scroll */
+            margin-top: 71px;
+        }
+
+            /* The navigation menu links */
+            .sidenav a {
+                padding: 30px 10px 40px 10px;
+                text-decoration: none;
+                font-family: 'Public Sans', sans-serif;
+                font-size: 20px;
+                color: #ffffff;
+                display: block;
+                text-align: center;
+            }
+
+                /* When you mouse over the navigation links, change their color */
+                .sidenav a:hover {
+                    color: #343a40;
+                }
+
+        /* Style page content */
+        .main {
+            margin-top: 100px;
+            margin-left: 160px; /* Same as the width of the sidebar */
+            padding: 0px 10px;
+        }
+    </style>
+</head>
+
+<body class="sb-nav-fixed" style="zoom:80%;">
+    @*/*this is some high level shit, data lai majale khelayera different productive report nikalne*/*@
+    <div class="sidenav">
+        @*Shows items that have been purchased from a specific vendor*@
+        <a href="~/Vendor/VendorPurchasesReport">Vendor Purchases</a>
+        @*Shows product name with their product parts along with their composition*@
+        <a href="~/Product/ProductPartsReport">Products Info</a>
+        @*Shows items sold to a specific customer*@
+        <a href="~/Customer/CustomerPurchasesReport">Customer & Sales</a>
+        @*Represents assignments provided to a specific employee with a dropdown*@
+        <a href="~/Assignment/EmployeeAssignmentReport">Employee Assignments</a>
+        <a href="~/DebitCredit/DebitAndCredit">Debit & Credit</a>
+        @*/*paisa tirna baki haru ko graph haru dekhaune*/*@
+        <!--<a href="#">Payables</a>-->
+        @*/* yaha chai stock haru k kati cha ani total holdings haru kati cha dekhaune*/*@
+        <!--<a href="#">Total Assets</a>-->
+        @*/* invested money ra payables haru k kasto dekhirako cha vanne*/*@
+        <!--<a href="#">Finance Status</a>-->
+        @*/*Loan k kasto cha ani ahile samma k kati interest hanyo dekhaune along with a line graph*/*@
+        <!--<a href="#">Loan Statement</a>-->
+        @*/*According to stock hami sanga kati asset cha ra kaha cha dekhaune*/*@
+        <!--<a href="#">Stock Visualization</a>-->
+        @*/* according to the earning hamile next target set garne */*@
+        <a href="#">Future Targets</a>
+
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="        position: fixed;
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+">
+        <a class="navbar-brand" style="font-family: 'Public Sans', sans-serif; color:white;"><h2>A Q U I L I A</h2></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto" style="font-family: 'Public Sans', sans-serif; color:white; width:1500px;">
+
+                <li class="nav-item dropdown" style="margin: 0 50px 0 60px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Vendor
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Vendor/AddNewVendor">Add Vendor</a>
+                        <a class="dropdown-item" href="~/Vendor/VendorLedger">Vendors' Ledger</a>
+                        <a class="dropdown-item" href="~/Vendor/AllActiveVendors">All Vendors</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown" style="margin-right:50px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Employee
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Employee/AddNewEmployee">Add Employee</a>
+                        <a class="dropdown-item" href="~/Employee/AllActiveEmployees">All Employees</a>
+
+                    </div>
+
+                </li>
+                <li class="nav-item dropdown" style="margin-right: 50px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Raw Materials
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/RawMaterials/AddNewRawMaterials">Add Raw Materials</a>
+                        <a class="dropdown-item" href="~/RawMaterials/AvailableRawMaterials">Available Raw Materials</a>
+
+                    </div>
+
+                </li>
+                <li class="nav-item dropdown" style="padding-right:50px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Products
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Product/AddNewProduct">Add Products</a>
+                        <a class="dropdown-item" href="~/Product/AllProductDetails">All Products</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown" style="padding-right:50px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Product Parts
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/ProductParts/AddNewProductParts">Add Product Parts</a>
+                        <a class="dropdown-item" href="~/ProductParts/AllProductPartDetails">Available Product Parts</a>
+                        <a class="dropdown-item" href="~/AssignmentProductParts/AddNewProductPartsComposition">New Product Part Composition</a>
+                        <a class="dropdown-item" href="~/AssignmentProductParts/AllProductPartsComposition">All Compositions</a>
+
+                    </div>
+
+                </li>
+
+                <li class="nav-item dropdown" style="padding-right:50px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Salary
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Product/AddNewProduct">Calculate Wage</a>
+                        <a class="dropdown-item" href="~/Product/AllProductDetails">Wage Report</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown" style="padding-right:50px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Assignment
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Assignment/AddNewAssignment">New Assignment</a>
+                        <a class="dropdown-item" href="~/Assignment/AddNewAssignmentLog">New Assignment Log</a>
+
+                        <a class="dropdown-item" href="~/Assignment/AllActiveAssignments">All Active Assignments</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown" style="padding-right:50px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Customer
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Customer/AddNewCustomer">New Customer</a>
+                        <a class="dropdown-item" href="~/Assignment/AllActiveCustomers">All Active Customers</a>
+
+                    </div>
+                </li>
+                <a href="~/Home/Index"><i class="fas fa-sign-out-alt" style="margin-top:10px;"></i> Logout</a>
+
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/datatables-demo.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<img class="block" id="u730_img" src="~/Images/background-low-opacity.png?crc=200722682" alt="" width="1300" height="659" />*@
+    <div style="margin: 100px 0 0 220px;
+        border-radius: 10px;
+        border: 3px solid #cf2f3e;
+        padding: 20px;
+        width: 1357px;
+        height: 755px;
+        background: url('@Url.Content("~/Images/background-low-opacity.png")');">
+
+        @await Component.InvokeAsync("Notyf")
+        @RenderSection("Scripts", required: false)
+        @RenderBody()
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" >Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

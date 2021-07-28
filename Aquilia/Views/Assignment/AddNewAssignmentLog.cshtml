@@ -1,0 +1,46 @@
+﻿@model Aquilia.Models.AssignmentLog
+<!DOCTYPE html>
+
+<html>
+
+<body>
+    <div class="card" style="padding :20px; font-family: 'Public Sans', sans-serif; opacity:80%">
+        <div class="card-body">
+            <form method="post" asp-action="AddNewAssignmentLog" asp-controller="Assignment">
+                <h1 style="padding-bottom:30px;">New Assignment Entry</h1>
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-xl-4">
+                        <label for="vendorName">Assignment Name</label>
+                        <input class="form-control" asp-for="AssignedDate" />
+                    </div>
+                    <div class="col-xl-4">
+                        <label for="vendorName">Assignment Name</label>
+                        <select asp-for="AssignmentId"
+                                class="form-control"
+                                asp-items="@(new SelectList(ViewBag.ListofAssignments,"AssignmentID", "AssignmentName"))">
+                        </select>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-xl-4">
+                        <label for="vendorName">Employee Name</label>
+                        <select asp-for="EmployeeID"
+                                class="form-control"
+                                asp-items="@(new SelectList(ViewBag.listofactiveemployees,"EmployeeID", "EmployeeName"))">
+                        </select>
+                    </div>
+
+
+                </div>
+                <button type="reset" class="btn btn-danger" style="margin-top:20px; float:right;"><i class="far fa-window-close"></i> Cancel</button>
+                <button type="submit" class="btn btn-success" style="margin-top:20px; margin-right:20px; float:right;"><i class="far fa-check-square"></i> Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+
+
+
+</html>
+

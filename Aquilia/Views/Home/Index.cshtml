@@ -1,0 +1,254 @@
+﻿
+    @model Aquilia.ViewModel.DashboardViewModel
+
+    @{
+        ViewBag.Title = "Dashboard";
+    }
+    <link href="~/Content/all.css" rel="stylesheet" />
+    <script src="~/Content/jquery-3.4.0.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/bootstrap.min.js"></script>
+    <script src="~/Content/mdb.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <span style="font-weight:900; margin:30px 30px 30px 30px;">Inventory Stock</span>
+        <div class="row">
+            <!-- ============================================================== -->
+            <!-- sales  -->
+            <!-- ============================================================== -->
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="card border-3 border-top border-top-primary">
+                    <div class="card-body text-center">
+                        <h5 class="text-muted" style="text-align:center;">Unread Inquiries</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">@Model.ActiveEmployees</h1>
+                        </div>
+                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                            <span class="icon-circle-small icon-box-xs text-success bg-success-light"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end sales  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- new customer  -->
+            <!-- ============================================================== -->
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="card border-3 border-top border-top-primary">
+                    <div class="card-body text-center">
+                        <h5 class="text-muted" style="text-align:center;">Distinct Products</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">@Model.ActiveVendors</h1>
+                        </div>
+                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end new customer  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- visitor  -->
+            <!-- ============================================================== -->
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class=" card border-3 border-top border-top-primary">
+                    <div class="card-body text-center">
+                        <h5 class="text-muted" style="text-align:center;">Total Available Stock</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">@Model.CompletedAssignments</h1>
+                        </div>
+                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end visitor  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- total orders  -->
+            <!-- ============================================================== -->
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="card border-3 border-top border-top-primary">
+                    <div class="card-body text-center">
+                        <h5 class="text-muted" style="text-align:center;">Total Customers</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">1</h1>
+                        </div>
+                        <div class="metric-label d-inline-block float-right text-danger font-weight-bold">
+                            <span class="icon-circle-small icon-box-xs text-danger bg-danger-light bg-danger-light "></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end total orders  -->
+            <!-- ============================================================== -->
+        </div>
+        <span style="font-weight:bold; margin:30px 30px 30px 10px;">Raw Materials Quantity</span>
+        <br />
+        <div class="row" style="padding-right:50px;">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="text-muted">Wax Use/kg(s)</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1"></h1>
+                        </div>
+                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+
+                        </div>
+                    </div>
+                    <div id="sparkline-revenue"></div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="text-muted"> Copper Use/kg(s)</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1"></h1>
+                        </div>
+                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+
+                        </div>
+                    </div>
+                    <div id="sparkline-revenue2"></div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="text-muted" style="text-align:center;">Gold Use/tola(s)</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1"></h1>
+                        </div>
+
+                    </div>
+                    <div id="sparkline-revenue3"></div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="text-muted">Total Items Sold</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1"></h1>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    <script type="text/javascript">
+    //pie
+
+    function createChart(data) {
+        var ctxP = document.getElementById("pieChartforComposition").getContext('2d');
+        var myPieChart = new Chart(ctxP, {
+            type: 'pie',
+
+            data: {
+                labels: ["Wax", "Copper", "Gold"],
+                datasets: [{
+                    data: data,
+                    backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+                }]
+            },
+            options: {
+                responsive: true
+
+
+            }
+        });
+    }
+    createStock();
+    createChart([120, 60, 130]);
+
+
+    $(function () {// on document ready function
+        $('#StockProductFiltering').on('change', function () {
+
+            //createChart = new Chart(createChart);
+
+            var SelectedStockProductId = $(this).val();
+            // ajax using this id. return data // [WaxStock,CopperStock,GoldStock]
+
+            $.ajax({
+                url: '/Home/getData/' + SelectedStockProductId,
+                type: "GET",
+                dataType: "json",
+                success: function (data)
+                {
+
+                   createChart([data.Wax[0].Text, data.Copper[0].Text, data.Gold[0].Text]);
+                   $(".size").val(data.Size[0].Text);
+                }
+                ,
+                error: function ()
+                {
+                    alert('Error');
+                }
+                }).then(function (response) {
+                    console.log(response);
+
+                })
+
+
+            })
+    });
+
+
+
+        function createStock() {
+            var ctx = document.getElementById("myChartforTotalStock").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Wax Stock', 'Copper Stock','Gold Stock'],
+                    datasets: [{
+                        label: 'Total Sales',
+                        data: [@Model.AvailableStock, @Model.ActiveEmployees, @Model.PendingAssignments],
+                        backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(255, 206, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+                          'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                          'rgba(255,99,132,1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+
+
+
+
+    </script>

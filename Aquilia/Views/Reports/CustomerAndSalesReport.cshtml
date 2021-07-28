@@ -1,0 +1,99 @@
+﻿@model Aquilia.Models.Customer
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="Content/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="Content/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script type="text/javascript" src="Content/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Content/js/script.js"></script>
+
+</head>
+<body>
+    <div class="row" style="margin-left:10px;">
+        <div class="col-md-5">
+            <h6>All Products:</h6> <select asp-for="CustomerID" , id="selectedCustomerID"
+                                             class="form-control"
+                                             asp-items="@(new SelectList(@ViewBag.listofcustomers,"CustomerID", "CustomerName"))" style="width: 500px;">
+            </select>
+            <br>
+            <label>Product ID: @Model?.CustomerName </label>
+
+            @*<br> <label style="margin-top:10px;">Product Name: @Model?. </label>*@
+            @*<br> <label style="margin-top:10px;">Transaction Date: </label>*@
+        </div>
+        @*<div class="col-md-4"><h6>Transaction Date:</h6><input class="form-control" id="transactionDate" asp-format="{0:yyyy-MM-ddTHH:mm}" /></div>*@
+
+        <div class="col-md-1"> <input type="button" class="btn btn-success" value="Search" onclick="ProductPartsSearch()" style="margin-top:25px;"></div>
+        <div class="col-md-1"> <button type="reset" class="btn btn-danger" style="margin-top:25px;">Cancel</button></div>
+
+        @*window.location.href='<%: Url.Action("DisplayVendorPurchases", "Vendor") %>'`*@
+    </div>
+    <table id="example" class="table table-striped table-bordered" style="width:97%; background-color:white; margin:20px;">
+        <thead>
+
+            
+            <tr>
+                <th>Product Name</th>
+                <th>product Part Code</th>
+                <th>Product Category</th>
+                <th>Wax Quantity</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tfoot>
+                @if (Model != null)
+                {
+                                @foreach (var finalproduct in Model.CustomerSalesViewModel)
+                                {
+                    <tr>
+                        <td>@finalproduct.</td>
+                        <td>@finalproduct.productPartCode</td>
+                        <td>@finalproduct.ProductCategory</td>
+                        <td>@finalproduct.WaxComposition</td>
+                        
+                    </tr>
+                                }
+                }
+                            </tfoot>
+    </table>
+    <script>
+
+        function ProductPartsSearch() {
+            @*var transDate = $('#transactionDate').val();*@
+            var FinalProdID = $('#selectedFinalProductID').val();
+            window.location.href = '@Url.Action("DisplayProductPartsReport", "Product")?FP_ID=' + FinalProdID;
+        }
+
+        $(document).ready(function () {
+
+    $('#example').DataTable();
+    $("#datepicker").datepicker();
+        });</script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/datatables-demo.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    @*</form>*@
+</body>
+
+
+</html>
