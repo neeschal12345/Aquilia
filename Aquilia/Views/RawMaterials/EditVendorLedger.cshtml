@@ -1,0 +1,85 @@
+@page
+@model Aquilia.Views.RawMaterials.EditVendorLedgerModel
+
+@{
+    ViewData["Title"] = "EditVendorLedger";
+}
+
+<h1>EditVendorLedger</h1>
+
+<h4>RawMaterials</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RawMaterials.RawMaterialID" />
+            <div class="form-group">
+                <label asp-for="RawMaterials.Date" class="control-label"></label>
+                <input asp-for="RawMaterials.Date" class="form-control" />
+                <span asp-validation-for="RawMaterials.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.BillNo" class="control-label"></label>
+                <input asp-for="RawMaterials.BillNo" class="form-control" />
+                <span asp-validation-for="RawMaterials.BillNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.Description" class="control-label"></label>
+                <input asp-for="RawMaterials.Description" class="form-control" />
+                <span asp-validation-for="RawMaterials.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.Quantity" class="control-label"></label>
+                <input asp-for="RawMaterials.Quantity" class="form-control" />
+                <span asp-validation-for="RawMaterials.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.Rate" class="control-label"></label>
+                <input asp-for="RawMaterials.Rate" class="form-control" />
+                <span asp-validation-for="RawMaterials.Rate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.VoucherNo" class="control-label"></label>
+                <input asp-for="RawMaterials.VoucherNo" class="form-control" />
+                <span asp-validation-for="RawMaterials.VoucherNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.ChequeNumber" class="control-label"></label>
+                <input asp-for="RawMaterials.ChequeNumber" class="form-control" />
+                <span asp-validation-for="RawMaterials.ChequeNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.CreditAmount" class="control-label"></label>
+                <input asp-for="RawMaterials.CreditAmount" class="form-control" />
+                <span asp-validation-for="RawMaterials.CreditAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.DebitAmount" class="control-label"></label>
+                <input asp-for="RawMaterials.DebitAmount" class="form-control" />
+                <span asp-validation-for="RawMaterials.DebitAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.CurrentBalance" class="control-label"></label>
+                <input asp-for="RawMaterials.CurrentBalance" class="form-control" />
+                <span asp-validation-for="RawMaterials.CurrentBalance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RawMaterials.VendorID" class="control-label"></label>
+                <select asp-for="RawMaterials.VendorID" class="form-control" asp-items="ViewBag.VendorID"></select>
+                <span asp-validation-for="RawMaterials.VendorID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

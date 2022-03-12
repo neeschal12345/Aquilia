@@ -4,14 +4,16 @@ using Aquilia.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Aquilia.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210802024501_Migration10")]
+    partial class Migration10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,13 +31,7 @@ namespace Aquilia.Migrations
                     b.Property<string>("AssignmentName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CastingDate")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProductPartID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("AssignmentID");
@@ -55,8 +51,8 @@ namespace Aquilia.Migrations
                     b.Property<DateTime>("AssignedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("AssignedState")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AssignedState")
+                        .HasColumnType("int");
 
                     b.Property<int>("AssignmentId")
                         .HasColumnType("int");
@@ -80,7 +76,7 @@ namespace Aquilia.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmployeeID")
+                    b.Property<int>("AssignmentID")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -91,7 +87,7 @@ namespace Aquilia.Migrations
 
                     b.HasKey("AssignmentRawMaterialsID");
 
-                    b.HasIndex("EmployeeID");
+                    b.HasIndex("AssignmentID");
 
                     b.HasIndex("RawMaterialID");
 
@@ -122,30 +118,6 @@ namespace Aquilia.Migrations
                     b.ToTable("Attendance");
                 });
 
-            modelBuilder.Entity("Aquilia.Models.Banks", b =>
-                {
-                    b.Property<int>("BankID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ACHolderName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AccountNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AccountType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BankName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BankID");
-
-                    b.ToTable("Banks");
-                });
-
             modelBuilder.Entity("Aquilia.Models.Customer", b =>
                 {
                     b.Property<int>("CustomerID")
@@ -153,16 +125,15 @@ namespace Aquilia.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
                     b.Property<long>("ContactNo")
                         .HasColumnType("bigint");
 
                     b.Property<string>("CustomerAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomerName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerID");
@@ -186,6 +157,9 @@ namespace Aquilia.Migrations
                     b.Property<int>("CurrentBalance")
                         .HasColumnType("int");
 
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Date")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -202,6 +176,8 @@ namespace Aquilia.Migrations
 
                     b.HasKey("TransactionID");
 
+                    b.HasIndex("CustomerID");
+
                     b.ToTable("CustomerLedger");
                 });
 
@@ -211,9 +187,6 @@ namespace Aquilia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BankID")
-                        .HasColumnType("int");
 
                     b.Property<long>("ChqNumber")
                         .HasColumnType("bigint");
@@ -236,9 +209,6 @@ namespace Aquilia.Migrations
                     b.Property<int>("FinalProductID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Month")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -248,21 +218,13 @@ namespace Aquilia.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TransactionType")
+                    b.Property<string>("StockStatus")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VoucherNo")
                         .HasColumnType("int");
 
-                    b.Property<string>("WorkType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Year")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("TransactionID");
-
-                    b.HasIndex("BankID");
 
                     b.HasIndex("EmployeeID");
 
@@ -293,9 +255,6 @@ namespace Aquilia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmployeeType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("ProductPartsProductPartID")
                         .HasColumnType("int");
 
@@ -319,9 +278,6 @@ namespace Aquilia.Migrations
 
                     b.Property<int?>("CustomerID")
                         .HasColumnType("int");
-
-                    b.Property<string>("Is")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -366,6 +322,9 @@ namespace Aquilia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProductPartQuantity")
+                        .HasColumnType("int");
+
                     b.Property<string>("WaxComposition")
                         .HasColumnType("nvarchar(max)");
 
@@ -374,41 +333,6 @@ namespace Aquilia.Migrations
                     b.HasIndex("FinalProductID");
 
                     b.ToTable("ProductParts");
-                });
-
-            modelBuilder.Entity("Aquilia.Models.ProductPartsStock", b =>
-                {
-                    b.Property<int>("ProductPartStockID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("PP_CopperModel")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("PP_Copper_Carving")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("PP_Copper_GoldPlated_FacePainted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("PP_Copper_GoldPlating")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("PP_WaxModel")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("PP_WaxWithClayModel")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProductPartID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductPartStockID");
-
-                    b.HasIndex("ProductPartID");
-
-                    b.ToTable("ProductPartsStock");
                 });
 
             modelBuilder.Entity("Aquilia.Models.RawMaterials", b =>
@@ -440,9 +364,6 @@ namespace Aquilia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PurchaseType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(18,2)");
 
@@ -462,6 +383,27 @@ namespace Aquilia.Migrations
                     b.ToTable("RawMaterials");
                 });
 
+            modelBuilder.Entity("Aquilia.Models.Salary", b =>
+                {
+                    b.Property<int>("SalaryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AttendanceID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SalaryMonth")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SalaryID");
+
+                    b.HasIndex("AttendanceID");
+
+                    b.ToTable("Salary");
+                });
+
             modelBuilder.Entity("Aquilia.Models.Sales", b =>
                 {
                     b.Property<int>("SalesID")
@@ -469,41 +411,20 @@ namespace Aquilia.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("ChqNumber")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal>("CreditAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("CurrentBalance")
+                    b.Property<int>("BillNo")
                         .HasColumnType("int");
 
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("DebitAmount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("FinalProductID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Rate")
+                    b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Remarks")
+                    b.Property<string>("TransactionDate")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TransactionType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VoucherNo")
-                        .HasColumnType("int");
 
                     b.HasKey("SalesID");
 
@@ -545,145 +466,91 @@ namespace Aquilia.Migrations
                     b.ToTable("Vendor");
                 });
 
-            modelBuilder.Entity("Aquilia.ViewModel.BankLedgerViewModel", b =>
+            modelBuilder.Entity("Aquilia.ViewModel.CustomerLedgerViewModel", b =>
                 {
-                    b.Property<int>("BankLedgerID")
+                    b.Property<int>("TransactionID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BanksBankID")
+                    b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("ChqNo")
+                    b.Property<long>("ChequeNumber")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("CurrentBalance")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("CreditAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("CurrentBalance")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Date")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("DebitAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("TransactionBy")
+                    b.Property<string>("Descriptions")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TransactionType")
+                    b.Property<string>("TransactionTypes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("BankLedgerID");
-
-                    b.HasIndex("BanksBankID");
-
-                    b.ToTable("BankLedgerViewModel");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.CustomerLedgerViewModel", b =>
-                {
-                    b.Property<int>("SalesID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<long>("ChequeNo")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal>("CreditAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("CustomerID")
+                    b.Property<int>("VoucherNo")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("DebitAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TransactionDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TransactionType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VoucherID")
-                        .HasColumnType("int");
-
-                    b.HasKey("SalesID");
+                    b.HasKey("TransactionID");
 
                     b.HasIndex("CustomerID");
 
                     b.ToTable("CustomerLedgerViewModel");
                 });
 
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.AssignmentViewModel", b =>
+            modelBuilder.Entity("Aquilia.ViewModel.CustomerSalesViewModel", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("CustomerSalesID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DashboardViewModelDashboardID")
+                    b.Property<int>("BillNo")
                         .HasColumnType("int");
 
-                    b.Property<string>("EmployeeName")
+                    b.Property<string>("CustomerAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FinalProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PendingQty")
+                    b.Property<int>("CustomerContact")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.Property<int?>("CustomerID")
+                        .HasColumnType("int");
 
-                    b.HasIndex("DashboardViewModelDashboardID");
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("AssignmentViewModel");
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductQuantity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ProductRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TransactionDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerSalesID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.ToTable("CustomerSalesViewModel");
                 });
 
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.AvailableProductsViewModel", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("DashboardViewModelDashboardID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FinalProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DashboardViewModelDashboardID");
-
-                    b.ToTable("AvailableProductsViewModel");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.DashboardViewModel", b =>
+            modelBuilder.Entity("Aquilia.ViewModel.DashboardViewModel", b =>
                 {
                     b.Property<int>("DashboardID")
                         .ValueGeneratedOnAdd()
@@ -732,80 +599,11 @@ namespace Aquilia.Migrations
                     b.Property<decimal>("ProfitLossStatus")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Remarks")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StockReportVMID")
-                        .HasColumnType("int");
-
-                    b.HasKey("DashboardID");
-
-                    b.HasIndex("EmployeeID");
-
-                    b.HasIndex("StockReportVMID");
-
-                    b.ToTable("DashboardViewModel");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.ProductCostViewModel", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ButtaCarvingEmployee")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("ButtaCarvingRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("CostPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("DashboardViewModelDashboardID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FacePaintingEmployee")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("FacePaintingRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("GoldPlatingEmployee")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("GoldPlatingRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("SellingPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DashboardViewModelDashboardID");
-
-                    b.ToTable("ProductCostViewModel");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.ResourceStockViewModel", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("DashboardViewModelDashboardID")
-                        .HasColumnType("int");
-
                     b.Property<string>("RawMaterialName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("RawmaterialQuantity")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("RawmaterialQuantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
@@ -813,129 +611,11 @@ namespace Aquilia.Migrations
                     b.Property<string>("VendorName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
-
-                    b.HasIndex("DashboardViewModelDashboardID");
-
-                    b.ToTable("ResourceStockViewModel");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.StockReportViewModel", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("TotalAsset")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TotalReceivable")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TotalSales")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TotalStock")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("StockReportViewModel");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.VoucheEntriesViewModel", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DashboardViewModelDashboardID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TransID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VoucherNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DashboardViewModelDashboardID");
-
-                    b.ToTable("VoucheEntriesViewModel");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.DebitAndCreditHomeBasedReportViewModel", b =>
-                {
-                    b.Property<int>("DebitCreditHomeBasedID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("BankName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ChequeNo")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("CreditAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Days")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("DebitAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EmployeeID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeName")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Month")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TransactionDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TransactionType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VoucherID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Year")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DebitCreditHomeBasedID");
+                    b.HasKey("DashboardID");
 
                     b.HasIndex("EmployeeID");
 
-                    b.ToTable("DebitAndCreditHomeBasedReportViewModel");
+                    b.ToTable("DashboardViewModel");
                 });
 
             modelBuilder.Entity("Aquilia.ViewModel.DebitAndCreditReportViewModel", b =>
@@ -951,8 +631,8 @@ namespace Aquilia.Migrations
                     b.Property<string>("BankName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ChequeNo")
-                        .HasColumnType("bigint");
+                    b.Property<int>("ChequeNo")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("CreditAmount")
                         .HasColumnType("decimal(18,2)");
@@ -987,9 +667,6 @@ namespace Aquilia.Migrations
                     b.Property<int>("VoucherID")
                         .HasColumnType("int");
 
-                    b.Property<string>("WorkType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("DebitCreditID");
 
                     b.HasIndex("EmployeeID");
@@ -1016,8 +693,8 @@ namespace Aquilia.Migrations
                     b.Property<int?>("AssignmentID")
                         .HasColumnType("int");
 
-                    b.Property<string>("AssignmentState")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AssignmentState")
+                        .HasColumnType("int");
 
                     b.Property<string>("EmployeeName")
                         .HasColumnType("nvarchar(max)");
@@ -1203,9 +880,9 @@ namespace Aquilia.Migrations
 
             modelBuilder.Entity("Aquilia.Models.Assignment_RawMaterials", b =>
                 {
-                    b.HasOne("Aquilia.Models.Employee", "Employee")
+                    b.HasOne("Aquilia.Models.Assignment", "Assignment")
                         .WithMany("assignment_RawMaterials")
-                        .HasForeignKey("EmployeeID")
+                        .HasForeignKey("AssignmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1215,7 +892,7 @@ namespace Aquilia.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Employee");
+                    b.Navigation("Assignment");
 
                     b.Navigation("RawMaterials");
                 });
@@ -1231,14 +908,19 @@ namespace Aquilia.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Aquilia.Models.DebitCredit", b =>
+            modelBuilder.Entity("Aquilia.Models.CustomerLedger", b =>
                 {
-                    b.HasOne("Aquilia.Models.Banks", "Banks")
-                        .WithMany("DebitCredit")
-                        .HasForeignKey("BankID")
+                    b.HasOne("Aquilia.Models.Customer", "Customer")
+                        .WithMany("CustomerLedger")
+                        .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Aquilia.Models.DebitCredit", b =>
+                {
                     b.HasOne("Aquilia.Models.Employee", "Employee")
                         .WithMany("DebitCredit")
                         .HasForeignKey("EmployeeID")
@@ -1250,8 +932,6 @@ namespace Aquilia.Migrations
                         .HasForeignKey("FinalProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Banks");
 
                     b.Navigation("Employee");
 
@@ -1285,17 +965,6 @@ namespace Aquilia.Migrations
                     b.Navigation("FinalProduct");
                 });
 
-            modelBuilder.Entity("Aquilia.Models.ProductPartsStock", b =>
-                {
-                    b.HasOne("Aquilia.Models.ProductParts", "ProductParts")
-                        .WithMany()
-                        .HasForeignKey("ProductPartID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductParts");
-                });
-
             modelBuilder.Entity("Aquilia.Models.RawMaterials", b =>
                 {
                     b.HasOne("Aquilia.Models.Vendor", "Vendor")
@@ -1305,6 +974,17 @@ namespace Aquilia.Migrations
                         .IsRequired();
 
                     b.Navigation("Vendor");
+                });
+
+            modelBuilder.Entity("Aquilia.Models.Salary", b =>
+                {
+                    b.HasOne("Aquilia.Models.Attendance", "Attendance")
+                        .WithMany()
+                        .HasForeignKey("AttendanceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Attendance");
                 });
 
             modelBuilder.Entity("Aquilia.Models.Sales", b =>
@@ -1326,72 +1006,28 @@ namespace Aquilia.Migrations
                     b.Navigation("FinalProduct");
                 });
 
-            modelBuilder.Entity("Aquilia.ViewModel.BankLedgerViewModel", b =>
-                {
-                    b.HasOne("Aquilia.Models.Banks", null)
-                        .WithMany("BankLedgerViewModel")
-                        .HasForeignKey("BanksBankID");
-                });
-
             modelBuilder.Entity("Aquilia.ViewModel.CustomerLedgerViewModel", b =>
                 {
-                    b.HasOne("Aquilia.Models.Customer", null)
+                    b.HasOne("Aquilia.Models.Customer", "Customer")
                         .WithMany("CustomerLedgerViewModel")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Aquilia.ViewModel.CustomerSalesViewModel", b =>
+                {
+                    b.HasOne("Aquilia.Models.Customer", null)
+                        .WithMany("CustomerSalesViewModel")
                         .HasForeignKey("CustomerID");
                 });
 
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.AssignmentViewModel", b =>
-                {
-                    b.HasOne("Aquilia.ViewModel.Dashboard.DashboardViewModel", null)
-                        .WithMany("AssignmentVM")
-                        .HasForeignKey("DashboardViewModelDashboardID");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.AvailableProductsViewModel", b =>
-                {
-                    b.HasOne("Aquilia.ViewModel.Dashboard.DashboardViewModel", null)
-                        .WithMany("AvailableProductsVM")
-                        .HasForeignKey("DashboardViewModelDashboardID");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.DashboardViewModel", b =>
+            modelBuilder.Entity("Aquilia.ViewModel.DashboardViewModel", b =>
                 {
                     b.HasOne("Aquilia.Models.Employee", null)
                         .WithMany("DashboardViewModel")
-                        .HasForeignKey("EmployeeID");
-
-                    b.HasOne("Aquilia.ViewModel.Dashboard.StockReportViewModel", "StockReportVM")
-                        .WithMany()
-                        .HasForeignKey("StockReportVMID");
-
-                    b.Navigation("StockReportVM");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.ProductCostViewModel", b =>
-                {
-                    b.HasOne("Aquilia.ViewModel.Dashboard.DashboardViewModel", null)
-                        .WithMany("ProductCostVM")
-                        .HasForeignKey("DashboardViewModelDashboardID");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.ResourceStockViewModel", b =>
-                {
-                    b.HasOne("Aquilia.ViewModel.Dashboard.DashboardViewModel", null)
-                        .WithMany("ResourceStockVM")
-                        .HasForeignKey("DashboardViewModelDashboardID");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.VoucheEntriesViewModel", b =>
-                {
-                    b.HasOne("Aquilia.ViewModel.Dashboard.DashboardViewModel", null)
-                        .WithMany("VoucheEntriesVM")
-                        .HasForeignKey("DashboardViewModelDashboardID");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.DebitAndCreditHomeBasedReportViewModel", b =>
-                {
-                    b.HasOne("Aquilia.Models.Employee", null)
-                        .WithMany("DebitAndCreditHomeBasedReportViewModel")
                         .HasForeignKey("EmployeeID");
                 });
 
@@ -1447,21 +1083,20 @@ namespace Aquilia.Migrations
 
             modelBuilder.Entity("Aquilia.Models.Assignment", b =>
                 {
+                    b.Navigation("assignment_RawMaterials");
+
                     b.Navigation("AssignmentLogs");
 
                     b.Navigation("EmployeeAssignmentsViewModel");
                 });
 
-            modelBuilder.Entity("Aquilia.Models.Banks", b =>
-                {
-                    b.Navigation("BankLedgerViewModel");
-
-                    b.Navigation("DebitCredit");
-                });
-
             modelBuilder.Entity("Aquilia.Models.Customer", b =>
                 {
+                    b.Navigation("CustomerLedger");
+
                     b.Navigation("CustomerLedgerViewModel");
+
+                    b.Navigation("CustomerSalesViewModel");
 
                     b.Navigation("FinalProducts");
 
@@ -1470,15 +1105,11 @@ namespace Aquilia.Migrations
 
             modelBuilder.Entity("Aquilia.Models.Employee", b =>
                 {
-                    b.Navigation("assignment_RawMaterials");
-
                     b.Navigation("AssignmentLog");
 
                     b.Navigation("Attendance");
 
                     b.Navigation("DashboardViewModel");
-
-                    b.Navigation("DebitAndCreditHomeBasedReportViewModel");
 
                     b.Navigation("DebitAndCreditReportViewModel");
 
@@ -1504,19 +1135,6 @@ namespace Aquilia.Migrations
                     b.Navigation("VendorLedgerViewModel");
 
                     b.Navigation("VendorPurchasesViewModel");
-                });
-
-            modelBuilder.Entity("Aquilia.ViewModel.Dashboard.DashboardViewModel", b =>
-                {
-                    b.Navigation("AssignmentVM");
-
-                    b.Navigation("AvailableProductsVM");
-
-                    b.Navigation("ProductCostVM");
-
-                    b.Navigation("ResourceStockVM");
-
-                    b.Navigation("VoucheEntriesVM");
                 });
 #pragma warning restore 612, 618
         }

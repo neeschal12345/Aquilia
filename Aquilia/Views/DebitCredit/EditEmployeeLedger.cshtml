@@ -1,0 +1,64 @@
+@model Aquilia.Models.RawMaterials
+@{ ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h2>Edit Existing Vendor</h2>
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Vendors Details </h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.RawMaterialID)
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Date </label>
+            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-3">
+            <label>Description </label>
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-3">
+            <label>Rate</label>
+            @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-3">
+            <label>Quantity </label>
+            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Debited Amount</label>
+            @Html.EditorFor(model => model.DebitAmount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DebitAmount, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-3">
+            <label>Cheque Number</label>
+            @Html.EditorFor(model => model.ChequeNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ChequeNumber, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-3">
+            <label>Credited Amount</label>
+            @Html.EditorFor(model => model.CreditAmount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreditAmount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-2 col-md-12">
+            <button type="submit" class="btn btn-success" style="margin-top:20px; float:right;"><i class="far fa-check-square"></i> Submit</button>
+        </div>
+    </div>
+</div>
+}

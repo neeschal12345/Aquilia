@@ -1,0 +1,105 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
+@model Aquilia.Models.DebitCredit
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/datatables-demo.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    @*<link href="/Aquilia/assets/css/nepali.datepicker.v3.7.min.css" rel="stylesheet" type="text/css" />*@
+
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v3.7.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body onload="sortDropdownList()">
+
+    <div style="width: 97%;background-color: white;margin: 20px;opacity: 80%;">
+        <div class="card" style="padding: 20px; font-family: 'Public Sans', sans-serif; ">
+
+            <form method="post" asp-action="AddNewTransaction" asp-controller="DebitCredit">
+                <h1 style="padding-bottom:20px;">Employee Stock Records</h1>
+                <hr />
+                <div class="row">
+                    <div class="col-xl-3">
+                        <label for="exampleInputPassword1">Date</label>
+                        <input type="text" class="form-control" asp-for="Date" id="nepali-datepicker" placeholder="Select Nepali Date" />
+                        @*<input type="text"   id="exampleInputPassword1" placeholder="Enter Today's Date">*@
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-xl-3">
+                        <label>Employee Name</label>
+                        <select asp-for="EmployeeID" class="form-control", id="list" asp-items="@(new SelectList(@ViewBag.ListofEmployee,"EmployeeID", "EmployeeName"))">
+                        </select>
+                    </div>
+                    <div class="col-xl-3">
+                        <label>Final Product Name</label>
+                        <select asp-for="FinalProductID" class="form-control" id="list2" asp-items="@(new SelectList(@ViewBag.ListofFinalProducts,"FinalProductID", "ProductName"))">
+                        </select>
+                    </div>
+                    <div class="col-xl-3">
+                        <label for="exampleInputPassword1">Quantity</label>
+                        <input type="text" asp-for="Quantity" class="form-control" id="exampleInputPassword1" placeholder="Enter the Vendor's Address">
+                    </div>
+                    <div class="col-xl-3">
+                        <label for="exampleInputPassword1">Rate</label>
+                        <input type="text" asp-for="Rate" class="form-control" id="exampleInputPassword1" placeholder="Enter the Vendor's Address">
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-xl-3" style="margin-top:25px;">
+                        <label>Stock Type: </label>
+                        @Html.DropDownListFor(m => m.TransactionType,
+                                            new SelectList(Enum.GetValues(typeof(Stock))),
+                                            "Stock In/Out??", new { style = "padding : 9px; padding-right: 140px;" })
+                    </div>
+                    <div class="col-xl-3">
+                        <label for="exampleInputPassword1">Voucher Number</label>
+                        <input type="text" asp-for="VoucherNo" class="form-control" id="exampleInputPassword1" placeholder="Enter the Vendor's Address">
+                    </div>
+                    <div class="col-xl-3">
+                        <label for="exampleInputPassword1">Credit Amount</label>
+                        <input type="text" asp-for="CreditAmount" class="form-control" id="exampleInputPassword1" placeholder="Enter the Vendor's Address">
+                    </div>
+                    <div class="col-xl-3">
+                        <label for="exampleInputPassword1">Description</label>
+                        <input type="text" asp-for="Remarks" class="form-control" id="exampleInputPassword1" placeholder="Enter the Vendor's Address">
+                    </div>
+
+                </div>
+
+                <button type="reset" class="btn btn-danger" style="margin-top:20px; float:right;"><i class="far fa-window-close"></i> Cancel</button>
+                <button type="submit" class="btn btn-success" style="margin-top:20px; margin-right:20px; float:right;"><i class="far fa-check-square"></i> Submit</button>
+                <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+            </form>
+        </div>
+    </div>
+    <script src="/Aquilia/assets/js/nepali.datepicker.v3.7.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v3.7.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    window.onload = function () {
+            var mainInput = document.getElementById("nepali-datepicker");
+            mainInput.nepaliDatePicker();
+        };</script>
+</body>
+</html>
+

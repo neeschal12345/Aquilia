@@ -1,0 +1,45 @@
+﻿@model Aquilia.Models.FinalProduct
+@{ ViewBag.Title = "Edit";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h2>Edit Existing Product</h2>
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Vendors Details </h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.FinalProductID)
+ 
+<div class="row">
+    <div class="col-md-3">
+        <label>Product Name: </label>
+        @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-3">
+        <label>Product Size</label>
+        @Html.EditorFor(model => model.ProductSize, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ProductSize, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-3">
+        <label>Product Category</label>
+        @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-3">
+        <label>Product Price </label>
+        @Html.EditorFor(model => model.ProductPrice, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ProductPrice, "", new { @class = "text-danger" })
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-12">
+            <button type="submit" class="btn btn-success" style="margin-top:20px; float:right;"><i class="far fa-check-square"></i> Submit</button>
+        </div>
+        </div>
+    </div>
+    }
